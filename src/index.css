@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-cream-100 text-brown-800 font-sans antialiased; }
+  h1, h2, h3, h4 { @apply font-serif text-maroon-700; }
+  :focus-visible { @apply outline-2 outline-offset-2 outline-saffron-500; }
+}
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed; }
+  .btn-primary { @apply btn bg-maroon-600 text-white hover:bg-maroon-700 shadow-soft; }
+  .btn-gold { @apply btn bg-gradient-to-r from-saffron-400 to-gold-500 text-maroon-900 hover:from-saffron-500 hover:to-gold-600 shadow-soft; }
+  .btn-outline { @apply btn border border-maroon-600 text-maroon-700 hover:bg-maroon-50; }
+  .btn-ghost { @apply btn text-maroon-700 hover:bg-maroon-50; }
+  .btn-danger { @apply btn bg-red-600 text-white hover:bg-red-700; }
+  .btn-sm { @apply px-3.5 py-1.5 text-xs; }
+  .card { @apply rounded-2xl bg-white shadow-soft border border-cream-200; }
+  .input { @apply w-full rounded-xl border border-cream-300 bg-white px-4 py-2.5 text-sm text-brown-800 placeholder:text-brown-400 focus:border-saffron-500 focus:outline-none focus:ring-2 focus:ring-saffron-100; }
+  .label { @apply mb-1.5 block text-sm font-medium text-brown-700; }
+  .field-error { @apply mt-1 text-xs text-red-600; }
+  .container-x { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
+  .section { @apply py-14 sm:py-20; }
+  .eyebrow { @apply text-xs font-semibold uppercase tracking-[0.2em] text-saffron-600; }
+  .badge { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold; }
+  .th { @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-brown-500; }
+  .td { @apply px-4 py-3 text-sm; }
+  .motif { background-image: radial-gradient(circle at 1px 1px, rgba(217,164,65,0.25) 1px, transparent 0); background-size: 22px 22px; }
+}
+
+/* Scroll reveal (see useScrollReveal in components/Layout.jsx) */
+@media (prefers-reduced-motion: no-preference) {
+  .rv {
+    opacity: 0;
+    translate: 0 28px;
+    transition: opacity 0.6s ease var(--rv-delay, 0ms), translate 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--rv-delay, 0ms);
+    will-change: opacity, translate;
+  }
+  .rv.rv-up { translate: 0 -28px; }
+  .rv.rv-in { opacity: 1; translate: 0 0; }
+}
+
+/* Hero motion */
+@keyframes hero-spin { to { transform: rotate(360deg); } }
+@keyframes hero-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes hero-flicker { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(0.96, 1.05); } }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-spin { animation: hero-spin 90s linear infinite; }
+  .hero-spin-rev { animation: hero-spin 60s linear infinite reverse; }
+  .hero-float { animation: hero-float 6s ease-in-out infinite; }
+  .hero-flame { animation: hero-flicker 2.4s ease-in-out infinite; }
+}
+
+/* Dual-handle price slider */
+.dual-range { position: relative; height: 22px; }
+.dual-track { position: absolute; left: 0; right: 0; top: 9px; height: 4px; border-radius: 4px; background: #ead7b3; }
+.dual-fill { position: absolute; top: 0; bottom: 0; background: #7b1e3a; border-radius: 4px; }
+.dual-range input[type="range"] { position: absolute; inset: 0; width: 100%; margin: 0; background: none; pointer-events: none; -webkit-appearance: none; appearance: none; }
+.dual-range input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; pointer-events: auto; height: 18px; width: 18px; border-radius: 9999px; background: #7b1e3a; border: 3px solid #fff; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35); cursor: pointer; }
+.dual-range input[type="range"]::-moz-range-thumb { pointer-events: auto; height: 14px; width: 14px; border-radius: 9999px; background: #7b1e3a; border: 3px solid #fff; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35); cursor: pointer; }
+
+/* Small screens: file inputs must never push a form wider than the viewport */
+input[type='file'] { max-width: 100%; }
